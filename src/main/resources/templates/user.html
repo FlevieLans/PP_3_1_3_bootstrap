@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information</title>
+</head>
+<body>
+<h1>User Information</h1>
+
+<p><strong>ID:</strong> <span th:text="${user.id}"></span></p>
+<p><strong>Name:</strong> <span th:text="${user.name}"></span></p>
+<p><strong>Surname:</strong> <span th:text="${user.surname}"></span></p>
+<p><strong>Age:</strong> <span th:text="${user.age}"></span></p>
+<p><strong>Username:</strong> <span th:text="${user.username}"></span></p>
+<p><strong>Roles:</strong> <span th:text="${user.roles}"></span></p>
+
+<br/>
+<hr/>
+<br>
+
+<td>
+    <div style="display: flex; gap: 10px;">
+
+        <form th:action="@{/}" style="margin: 0;">
+            <input type="submit" value="Home">
+        </form>
+        <form th:action="@{/user}" th:if="${#authorization.expression('isAuthenticated()')}" style="margin: 0;">
+            <input type="submit" value="Profile">
+        </form>
+        <form th:action="@{/admin}" th:if="${#authorization.expression('hasRole(''ADMIN'')')}" style="margin: 0;">
+            <input type="submit" value="Admin">
+        </form>
+        <form th:action="@{/logout}" th:if="${#authorization.expression('isAuthenticated()')}" style="margin: 0;">
+            <input type="submit" value="Logout">
+        </form>
+        <form th:action="@{/login}" th:if="${#authorization.expression('!isAuthenticated()')}" style="margin: 0;">
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</td>
+
+</body>
+</html>

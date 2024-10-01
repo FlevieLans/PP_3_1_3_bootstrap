@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Home</title>
+</head>
+<body>
+<h1>Welcome to home page!</h1>
+
+<br>
+
+<td>
+    <div style="display: flex; gap: 10px;">
+
+        <form th:action="@{/}" style="margin: 0;">
+            <input type="submit" value="Home">
+        </form>
+        <form th:action="@{/user}" th:if="${#authorization.expression('isAuthenticated()')}" style="margin: 0;">
+            <input type="submit" value="Profile">
+        </form>
+        <form th:action="@{/admin}" th:if="${#authorization.expression('hasRole(''ADMIN'')')}" style="margin: 0;">
+            <input type="submit" value="Admin">
+        </form>
+        <form th:action="@{/logout}" th:if="${#authorization.expression('isAuthenticated()')}" style="margin: 0;">
+            <input type="submit" value="Logout">
+        </form>
+        <form th:action="@{/login}" th:if="${#authorization.expression('!isAuthenticated()')}" style="margin: 0;">
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</td>
+
+</body>
+</html>
