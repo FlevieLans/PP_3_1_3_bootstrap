@@ -9,16 +9,21 @@
 </head>
 <body>
 
-<!-- Верхняя панель навигации -->
+<!-- Верхняя навигация -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <span class="navbar-text">
-            <span th:text="${user.username}"></span> with roles:
-            <span th:text="${user.roles.toString().replace('ROLE_', '').replace('[', '').replace(']', '')}"></span>
+            <span th:text="${#authentication.getName()}"></span> WITH
+            <span th:if="${#authentication.getAuthorities()?.size() == 1}">
+                <span th:text="${#authentication.getAuthorities()?.![getAuthority()].toString().replace('ROLE_', '').replace('[', '').replace(']', '')}"></span> ROLE
+            </span>
+            <span th:if="${#authentication.getAuthorities()?.size() > 1}">
+                <span th:text="${#authentication.getAuthorities()?.![getAuthority()].toString().replace('ROLE_', '').replace(',', ' &').replace('[', '').replace(']', '')}"></span> ROLES
+            </span>
         </span>
         <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/logout">Logout</a>
+                <a class="nav-link" href="/logout">LOGOUT</a>
             </li>
         </ul>
     </div>
@@ -31,8 +36,18 @@
             <div class="position-sticky pt-3">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">
-                            User
+                        <a class="nav-link" href="/">
+                            HOME
+                        </a>
+                    </li>
+                    <li class="nav-item" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                        <a class="nav-link" href="/admin">
+                            ADMIN
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user">
+                            USER
                         </a>
                     </li>
                 </ul>
@@ -42,21 +57,21 @@
         <!-- Основная панель -->
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">User information-page</h1>
+                <h1 class="h2">USER INFORMATION</h1>
             </div>
 
             <!-- Информация о пользователе -->
-            <h4>About user</h4>
+            <h4>ABOUT USER</h4>
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Age</th>
-                        <th>Username</th>
-                        <th>Roles</th>
+                        <th>NAME</th>
+                        <th>SURNAME</th>
+                        <th>AGE</th>
+                        <th>USERNAME</th>
+                        <th>ROLES</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -70,27 +85,6 @@
                     </tr>
                     </tbody>
                 </table>
-            </div>
-
-            <!-- Блок с кнопками навигации -->
-            <div class="mt-4">
-                <div style="display: flex; gap: 10px;">
-                    <form th:action="@{/}" style="margin: 0;">
-                        <button class="btn btn-primary">Home</button>
-                    </form>
-                    <form th:action="@{/user}" th:if="${#authorization.expression('isAuthenticated()')}" style="margin: 0;">
-                        <button class="btn btn-secondary">Profile</button>
-                    </form>
-                    <form th:action="@{/admin}" th:if="${#authorization.expression('hasRole(''ADMIN'')')}" style="margin: 0;">
-                        <button class="btn btn-warning">Admin</button>
-                    </form>
-                    <form th:action="@{/logout}" th:if="${#authorization.expression('isAuthenticated()')}" style="margin: 0;">
-                        <button class="btn btn-danger">Logout</button>
-                    </form>
-                    <form th:action="@{/login}" th:if="${#authorization.expression('!isAuthenticated()')}" style="margin: 0;">
-                        <button class="btn btn-success">Login</button>
-                    </form>
-                </div>
             </div>
 
         </main>
