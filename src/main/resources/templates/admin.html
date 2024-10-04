@@ -9,10 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
-        .nav-link.active {
-            background-color: LinkText;
-            color: white;
-        }
+        .nav-link.active { background-color: LinkText; color: white; border-radius: 8px;}
     </style>
 </head>
 
@@ -46,19 +43,13 @@
             <div class="position-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">
-                            HOME PAGE
-                        </a>
+                        <a class="nav-link" href="/">HOME PAGE</a>
                     </li>
                     <li class="nav-item" sec:authorize="hasRole('ADMIN')">
-                        <a class="nav-link active" href="/admin">
-                            ADMIN PANEL
-                        </a>
+                        <a class="nav-link active" href="/admin">ADMIN PANEL</a>
                     </li>
                     <li class="nav-item" sec:authorize="isAuthenticated()">
-                        <a class="nav-link" href="/user">
-                            USER INFORMATION
-                        </a>
+                        <a class="nav-link" href="/user">USER INFORMATION</a>
                     </li>
                 </ul>
             </div>
@@ -115,13 +106,11 @@
                                         <td th:utext="${user.getAge()}"></td>
                                         <td th:utext="${user.getUsername()}"></td>
                                         <td th:utext="${user.getRoles()}"></td>
-                                        <td>
-                                            <a type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                                               th:data-bs-target="${'#editModal' + user.id}">Edit</a>
+                                        <td> <a type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                               th:data-bs-target="${'#editModal' + user.id}">EDIT</a>
                                         </td>
-                                        <td>
-                                            <a type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                               th:data-bs-target="${'#deleteModal' + user.id}">Delete</a>
+                                        <td> <a type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                               th:data-bs-target="${'#deleteModal' + user.id}">DELETE</a>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -209,13 +198,12 @@
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="editModalLabel">Edit user</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
+                                <h5 class="modal-title" id="editModalLabel">EDIT USER</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                </button>
                             </div>
                             <form th:action="@{/admin/{id}(id=${user.id})}" th:object="${user}" th:method="PUT">
                                 <div class="modal-body col-md text-center">
-                                    <br>
                                     <label for="name0"><b>Name</b></label>
                                     <input th:name="name" th:type="text" class="form-control" id="name0"
                                            th:value="${user.name}"/>
@@ -235,11 +223,11 @@
                                     <label for="password0"><b>Password</b></label>
                                     <input th:name="password" type="text" class="form-control" id="password0"
                                            th:value="${user.password}"/>
-                                    <br><br>
+                                    <br>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary">Edit</button>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    <button type="submit" class="btn btn-primary">EDIT</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CLOSE
                                     </button>
                                 </div>
                             </form>
@@ -251,42 +239,45 @@
 
             <!-- Начало модального окна удаления пользователя -->
             <div th:each="user : ${allUsers}">
-                <div class="modal fade" th:id="'deleteModal' + ${user.id}" tabindex="-1" aria-labelledby="deleteModalLabel"
-                     aria-hidden="true">
+                <div class="modal fade" th:id="'deleteModal' + ${user.id}" tabindex="-1"
+                     aria-labelledby="deleteModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="deleteModalLabel">Delete user</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <h5 class="modal-title" id="deleteModalLabel">DELETE USER</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                </button>
                             </div>
                             <form th:action="@{/admin/{id}/delete(id=${user.id})}" th:method="DELETE">
                                 <div class="modal-body col-md text-center">
-                                    <p>Are you sure you want to delete this user?</p>
                                     <label for="id"><b>ID</b></label>
-                                    <input th:name="id" th:type="text" class="form-control" id="id" th:value="${user.id}" disabled/>
+                                    <input th:name="id" th:type="text" class="form-control" id="id"
+                                           th:value="${user.id}" disabled/>
                                     <br>
                                     <label for="name1"><b>Name</b></label>
-                                    <input th:name="name" th:type="text" class="form-control" id="name1" th:value="${user.name}" disabled/>
+                                    <input th:name="name" th:type="text" class="form-control" id="name1"
+                                           th:value="${user.name}" disabled/>
                                     <br>
                                     <label for="surname1"><b>Surname</b></label>
-                                    <input th:name="surname" th:type="text" class="form-control" id="surname1" th:value="${user.surname}" disabled/>
+                                    <input th:name="surname" th:type="text" class="form-control" id="surname1"
+                                           th:value="${user.surname}" disabled/>
                                     <br>
                                     <label for="username1"><b>Username</b></label>
-                                    <input th:name="username" th:type="text" class="form-control" id="username1" th:value="${user.username}" disabled/>
+                                    <input th:name="username" th:type="text" class="form-control" id="username1"
+                                           th:value="${user.username}" disabled/>
                                     <br>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-danger">DELETE</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CLOSE
+                                    </button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-
             <!-- Конец модального окна удаления пользователя -->
-
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
                     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
