@@ -60,7 +60,9 @@
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 bg-light">
             <div>
                 <div>
-                    <h1>ADMIN PANEL</h1>
+                    <div class="p-2">
+                        <h1>ADMIN PANEL</h1>
+                    </div>
 
                     <!-- Начало кнопок переключения вкладок -->
                     <nav>
@@ -79,7 +81,7 @@
                     <div class="tab-content" id="nav-tabContent">
 
                         <!-- Начало таблицы всех пользователей -->
-                        <div class="tab-pane fade show active" id="nav-users" role="tabpanel"
+                        <div class="tab-pane fade show active " id="nav-users" role="tabpanel"
                              aria-labelledby="nav-users-tab">
                             <div class="p-2 border">
                                 <h5>ALL USERS</h5>
@@ -235,6 +237,12 @@
                                     <input th:name="password" type="text" class="form-control" id="password0"
                                            th:value="${user.password}"/>
                                     <br>
+                                    <label for="roles0"><b>Roles</b></label>
+                                    <select th:name="roles" class="form-select" id="roles0" multiple>
+                                        <option value="1" th:selected="${user.roles.contains('ROLE_USER')}">USER</option>
+                                        <option value="2" th:selected="${user.roles.contains('ROLE_ADMIN')}">ADMIN</option>
+                                    </select>
+                                    <br>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary">EDIT</button>
@@ -276,6 +284,10 @@
                                     <label for="username1"><b>Username</b></label>
                                     <input th:name="username" th:type="text" class="form-control" id="username1"
                                            th:value="${user.username}" disabled/>
+                                    <br>
+                                    <label for="roles1"><b>Roles</b></label>
+                                    <input th:name="roles" th:type="text" class="form-control" id="roles1"
+                                           th:value="${user.roles}" disabled/>
                                     <br>
                                 </div>
                                 <div class="modal-footer">

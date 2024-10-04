@@ -52,12 +52,12 @@ public class AdminController {
     @GetMapping("admin/{id}/edit")
     public String editUser(@ModelAttribute("id") int id, Model model) {
         model.addAttribute("user", userService.getUser(id));
-        return "edit";
+        return "admin";
     }
 
     @PostMapping("admin/{id}")
     public String updateUser(@PathVariable("id") int id, @ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) { return "edit"; }
+        if (bindingResult.hasErrors()) { return "admin"; }
         if (user.getPassword() != null && !user.getPassword().isEmpty()) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         } else {
