@@ -133,7 +133,7 @@
                                                 <div class="form-group m-3">
 
                                                     <div class="form-group m-3">
-                                                        <label for="name" class="col-form-label">Name</label>
+                                                            <label for="name" class="col-form-label">NAME</label>
                                                         <input type="text" class="form-control" id="name"
                                                                th:field="*{name}"/>
                                                         <div style="color:red" th:if="${#fields.hasErrors('name')}"
@@ -142,7 +142,7 @@
                                                     </div>
 
                                                     <div class="form-group m-3">
-                                                        <label for="surname" class="col-form-label">Surname</label>
+                                                        <label for="surname" class="col-form-label">SURNAME</label>
                                                         <input type="text" class="form-control" id="surname"
                                                                th:field="*{surname}"/>
                                                         <div style="color:red" th:if="${#fields.hasErrors('surname')}"
@@ -151,7 +151,7 @@
                                                     </div>
 
                                                     <div class="form-group m-3">
-                                                        <label for="age" class="col-form-label">Age</label>
+                                                        <label for="age" class="col-form-label">AGE</label>
                                                         <input type="text" class="form-control" id="age"
                                                                th:field="*{age}"/>
                                                         <div style="color:red" th:if="${#fields.hasErrors('age')}"
@@ -160,7 +160,7 @@
                                                     </div>
 
                                                     <div class="form-group m-3">
-                                                        <label for="username" class="col-form-label">Username</label>
+                                                        <label for="username" class="col-form-label">USERNAME</label>
                                                         <input type="text" class="form-control" id="username"
                                                                th:field="*{username}"/>
                                                         <div style="color:red" th:if="${#fields.hasErrors('username')}"
@@ -169,12 +169,23 @@
                                                     </div>
 
                                                     <div class="form-group m-3">
-                                                        <label for="password" class="col-form-label">Password</label>
+                                                        <label for="password" class="col-form-label">PASSWORD</label>
                                                         <input type="text" class="form-control" id="password"
                                                                th:field="*{password}"/>
                                                         <div style="color:red" th:if="${#fields.hasErrors('password')}"
                                                              th:errors="*{password}">Password Error
                                                         </div>
+                                                    </div>
+
+                                                    <div class="form-group m-3">
+                                                        <label for="roles" class="col-form-label">ROLES</label>
+                                                        <select class="form-select" id="roles"
+                                                                th:field="*{roles}" multiple>
+                                                            <option value="1">USER</option>
+                                                            <option value="2">ADMIN</option>
+                                                        </select>
+                                                        <div style="color:red" th:if="${#fields.hasErrors('roles')}"
+                                                             th:errors="*{roles}">Roles Error</div>
                                                     </div>
 
                                                 </div>
